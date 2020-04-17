@@ -1977,7 +1977,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }).listen('ChatEvent', function (event) {
       _this.messages.push(event.chat);
-    }) //other people
+    }) //other
     .listenForWhisper('typing', function (user) {
       _this.activeUser = user;
 

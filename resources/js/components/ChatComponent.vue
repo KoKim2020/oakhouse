@@ -1,7 +1,7 @@
 
 <template>
     <div class="row">
-        <!-- <pre> {{ users }}</pre> -->
+        <!-- <pre> {{ user }}</pre> -->
         <div class="col-8">
             <div class="card card-default">
                 <div class="card-header">Messages</div>
@@ -69,7 +69,7 @@
                 .listen('ChatEvent',(event) => {
                     this.messages.push(event.chat);
                 })
-                //other people
+                //other
                 .listenForWhisper('typing', user => {
                 this.activeUser = user;
                     if(this.typingTimer) {
