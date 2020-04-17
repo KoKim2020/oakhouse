@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 //use chat model
 use App\Chat;
 use Illuminate\Support\Facades\Auth;
+//events
+use App\Events\ChatEvent;
 
 class ChatController extends Controller
 {
@@ -33,8 +35,7 @@ class ChatController extends Controller
         // $user = $chat->user()->get();
         // return $user;
 
-        // return Chat::with('user')->get();
-        return view('chat.chat');
+        return Chat::with('user')->get();
         
     }
 
@@ -42,17 +43,20 @@ class ChatController extends Controller
     {
         
         $user = Auth::user();
-        $chats = $user->messages()->create([
-            'message' => 'testing 123'
+        $chat = $user->messages()->create([
+            'message' => $request->message
         ]);
-        return $chats->load('user');  //attaching user with chats
+        // return $chats->load('user');  //attaching user with chats
 
         //associate() is used to update a belongsTo() relationship.
         // $chat = Chat::find(2);        
         // $chat->user()->associate($user);
         // $chat->save();
-
         
-            
+        //Broadcast syntax
+        broadcast(new ChatEvent($chat->load('user')))->toOthers();
+        
+        return ['status' => 'success'];
+
     }
 }
