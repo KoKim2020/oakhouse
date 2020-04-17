@@ -50,7 +50,7 @@
                 messages: [],
                 newMessage: '',
                 users:[],
-                activeUser: false,
+                activeUser: {},
                 typingTimer: false,
             }
         },

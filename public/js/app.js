@@ -1959,7 +1959,7 @@ __webpack_require__.r(__webpack_exports__);
       messages: [],
       newMessage: '',
       users: [],
-      activeUser: false,
+      activeUser: {},
       typingTimer: false
     };
   },
