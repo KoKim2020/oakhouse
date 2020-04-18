@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -31,6 +32,7 @@ Vue.component('chat-component', require('./components/ChatComponent.vue').defaul
 
 //use vue-chat-scroll package
 
+import ('../../src/quasar');
 import VueChatScroll from 'vue-chat-scroll';
 Vue.use(VueChatScroll)
 
