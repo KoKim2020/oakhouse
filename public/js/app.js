@@ -89872,7 +89872,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-9" }, [
+      _c("div", { staticClass: "col-9 col-md-9" }, [
         _c(
           "div",
           {
@@ -89897,7 +89897,7 @@ var render = function() {
                         text: [message.message],
                         stamp: "7 minutes ago",
                         sent: "",
-                        "bg-color": "amber-7"
+                        "bg-color": "secondary"
                       }
                     })
                   : _vm._e(),
@@ -90023,7 +90023,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "col-lg-3" },
+        { staticClass: "col-3 col-md-3" },
         [
           _c("h5", { staticClass: "text-center" }, [_vm._v("Active Guys")]),
           _vm._v(" "),

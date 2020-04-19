@@ -2,7 +2,7 @@
     <div class="container-fluid">
             
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-9 col-md-9">
                 <!-- using vue chat scroll module for chatting -->
                 <div style="height:500px; overflow: hidden; overflow-y:scroll" v-chat-scroll>
                     <!-- chat messages -->
@@ -13,7 +13,7 @@
                             :text="[message.message]"
                             stamp="7 minutes ago"
                             sent
-                            bg-color="amber-7"
+                            bg-color="secondary"
                             class="mr-4"
                         />
                         <q-chat-message   v-if ="message.user.id === user_id"
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <!-- Active Users -->
-            <div class="col-lg-3">
+            <div class="col-3 col-md-3">
                 <h5 class="text-center">Active Guys</h5>
                 <div v-for="(user, index) in users" :key="index">
                     <q-item clickable v-ripple>
