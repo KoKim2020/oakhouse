@@ -29,7 +29,17 @@ Vue.component('chat-component', require('./components/ChatComponent.vue').defaul
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
+// Quasar Framework 
+import  Quasar  from  'quasar'; 
+//import from node_modules
+import  'quasar/dist/quasar.sass'; 
+import  'quasar-extras/material-icons';
+import 'quasar-extras/fontawesome';
+
+Vue.use(Quasar);
 //use vue-chat-scroll package
+
 
 import VueChatScroll from 'vue-chat-scroll';
 Vue.use(VueChatScroll)

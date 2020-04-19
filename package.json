@@ -26,6 +26,8 @@
     "dependencies": {
         "laravel-echo": "^1.7.0",
         "pusher-js": "^5.1.1",
+        "quasar": "^1.9.15",
+        "quasar-extras": "^2.0.9",
         "vue-chat-scroll": "^1.4.0"
     }
 }

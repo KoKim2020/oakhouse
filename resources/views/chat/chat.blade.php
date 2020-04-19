@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container">
-    <chat-component :user="{{ auth()->user() }}"></chat-component>
+    {{-- <q-select v-model="model" :options="options" label="Standard" /> --}}
+    <chat-component ></chat-component>
 </div>
 @endsection 
