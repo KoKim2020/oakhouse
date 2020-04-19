@@ -1899,6 +1899,179 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChatComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ChatComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user'],
+  data: function data() {
+    return {
+      name: this.user.name,
+      messages: [],
+      //messages from database
+      user_id: this.user.id,
+      newMessage: '',
+      dense: false,
+      users: [],
+      //all users
+      testing: [],
+      typing: false,
+      otherUser: {}
+    };
+  },
+  created: function created() {
+    var _this2 = this;
+
+    var _this = this;
+
+    this.getMessages(); //Using Chat Channel As presence
+
+    Echo.join('chat') // channel ထဲမှာ လက်ရှိ active ဖြစ်နေတဲ့ user တွေ ကို channel က return
+    // ပြန်ပေးတာ
+    .here(function (user) {
+      // console.log(user);
+      _this2.users = user;
+    }) // အသစ် join လာတဲ့ user ကို channel က reply ပြန်ပေးတာ
+    .joining(function (user) {
+      _this2.users.push(user);
+    }) /// to remove the leaving user from active guys
+    .leaving(function (user) {
+      _this2.users = _this2.users.filter(function (u) {
+        return u.id != user.id;
+      });
+    }) //listening the broadcast event
+    .listen('ChatEvent', function (event) {
+      /// to add other people message 
+      _this2.messages.push(event.chat);
+    }).listenForWhisper('typing', function (e) {
+      var v = _this2;
+      console.log(e);
+      _this2.otherUser = e.user;
+      _this2.typing = e.typing; // remove is typing indicator after 0.9s
+
+      setTimeout(function () {
+        v.typing = false;
+      }, 900);
+    });
+  },
+  methods: {
+    getMessages: function getMessages() {
+      var _this3 = this;
+
+      axios.get('/messages').then(function (response) {
+        _this3.messages = response.data;
+      });
+    },
+    sendMessage: function sendMessage() {
+      this.messages.push({
+        user: this.user,
+        message: this.newMessage
+      });
+      axios.post('/messages', {
+        message: this.newMessage
+      });
+      this.newMessage = '';
+    },
+    /// send typing of me
+    sendTypingEvent: function sendTypingEvent() {
+      var vm = this;
+      var channel = Echo.join('chat');
+      setTimeout(function () {
+        channel.whisper('typing', {
+          user: vm.user.name,
+          typing: true
+        });
+      }, 300);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -89697,35 +89870,202 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "q-pa-md row justify-center" }, [
-    _c(
-      "div",
-      { staticStyle: { width: "100%", "max-width": "400px" } },
-      [
-        _c("q-chat-message", {
-          attrs: {
-            name: "me",
-            avatar: "https://cdn.quasar.dev/img/avatar1.jpg",
-            text: ["hey, how are you?"],
-            stamp: "7 minutes ago",
-            sent: "",
-            "bg-color": "amber-7"
-          }
-        }),
+  return _c("div", { staticClass: "container-fluid" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-9" }, [
+        _c(
+          "div",
+          {
+            directives: [{ name: "chat-scroll", rawName: "v-chat-scroll" }],
+            staticStyle: {
+              height: "500px",
+              overflow: "hidden",
+              "overflow-y": "scroll"
+            }
+          },
+          _vm._l(_vm.messages, function(message, index) {
+            return _c(
+              "div",
+              { key: index, staticStyle: { "max-width": "100%" } },
+              [
+                message.user.id != _vm.user_id
+                  ? _c("q-chat-message", {
+                      staticClass: "mr-4",
+                      attrs: {
+                        name: message.user.name,
+                        avatar: "https://cdn.quasar.dev/img/avatar1.jpg",
+                        text: [message.message],
+                        stamp: "7 minutes ago",
+                        sent: "",
+                        "bg-color": "amber-7"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                message.user.id === _vm.user_id
+                  ? _c("q-chat-message", {
+                      staticClass: "ml-4",
+                      attrs: {
+                        name: message.user.name,
+                        avatar: "https://cdn.quasar.dev/img/avatar5.jpg",
+                        text: [message.message],
+                        stamp: "4 minutes ago",
+                        "text-color": "white",
+                        "bg-color": "primary"
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          }),
+          0
+        ),
         _vm._v(" "),
-        _c("q-chat-message", {
-          attrs: {
-            name: "Jane",
-            avatar: "https://cdn.quasar.dev/img/avatar5.jpg",
-            text: ["doing fine, how r you?"],
-            stamp: "4 minutes ago",
-            "text-color": "white",
-            "bg-color": "primary"
-          }
-        })
-      ],
-      1
-    )
+        _c(
+          "div",
+          { staticClass: "m-3" },
+          [
+            _c("q-input", {
+              attrs: {
+                "bottom-slots": "",
+                counter: "",
+                maxlength: "150",
+                dense: _vm.dense
+              },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.sendMessage($event)
+                },
+                keydown: _vm.sendTypingEvent
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "before",
+                  fn: function() {
+                    return [
+                      _c("q-avatar", [
+                        _c("img", {
+                          attrs: {
+                            src: "https://cdn.quasar.dev/img/avatar5.jpg"
+                          }
+                        })
+                      ])
+                    ]
+                  },
+                  proxy: true
+                },
+                {
+                  key: "hint",
+                  fn: function() {
+                    return [
+                      _vm._v(
+                        "\n                    Enter Your Message.....\n                    "
+                      )
+                    ]
+                  },
+                  proxy: true
+                },
+                {
+                  key: "after",
+                  fn: function() {
+                    return [
+                      _c("q-btn", {
+                        attrs: { round: "", dense: "", flat: "", icon: "send" },
+                        on: { click: _vm.sendMessage }
+                      })
+                    ]
+                  },
+                  proxy: true
+                }
+              ]),
+              model: {
+                value: _vm.newMessage,
+                callback: function($$v) {
+                  _vm.newMessage = $$v
+                },
+                expression: "newMessage"
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.typing,
+                    expression: "typing"
+                  }
+                ],
+                staticClass: "help-block",
+                staticStyle: { "font-style": "italic" }
+              },
+              [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.otherUser) +
+                    " is typing...\n                "
+                )
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-lg-3" },
+        [
+          _c("h5", { staticClass: "text-center" }, [_vm._v("Active Guys")]),
+          _vm._v(" "),
+          _vm._l(_vm.users, function(user, index) {
+            return _c(
+              "div",
+              { key: index },
+              [
+                _c(
+                  "q-item",
+                  {
+                    directives: [{ name: "ripple", rawName: "v-ripple" }],
+                    attrs: { clickable: "" }
+                  },
+                  [
+                    _c("q-item-section", [_vm._v(_vm._s(user.name))]),
+                    _vm._v(" "),
+                    _c(
+                      "q-item-section",
+                      { attrs: { avatar: "" } },
+                      [
+                        _c("q-avatar", { attrs: { rounded: "" } }, [
+                          _c("img", {
+                            attrs: {
+                              src: "https://cdn.quasar.dev/img/boy-avatar.png"
+                            }
+                          })
+                        ])
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          })
+        ],
+        2
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -102058,15 +102398,17 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChatComponent.vue?vue&type=template&id=80d584ac& */ "./resources/js/components/ChatComponent.vue?vue&type=template&id=80d584ac&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ChatComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChatComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ChatComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ChatComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ChatComponent_vue_vue_type_template_id_80d584ac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -102080,6 +102422,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/ChatComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ChatComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/ChatComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChatComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ChatComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChatComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChatComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

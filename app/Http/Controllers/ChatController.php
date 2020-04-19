@@ -56,7 +56,7 @@ class ChatController extends Controller
         //Broadcast syntax
         broadcast(new ChatEvent($chat->load('user')))->toOthers();
         
-        return ['status' => 'success'];
+        return $chat;
 
     }
 }

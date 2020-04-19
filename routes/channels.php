@@ -18,7 +18,6 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 
 //presence channel
-
 Broadcast::channel('chat', function ($user) {
     return $user;
 });
