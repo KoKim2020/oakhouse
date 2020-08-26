@@ -13,10 +13,10 @@ class ChatController extends Controller
 {
 
     // contruct =>  PHP will automatically call this function when you create an object from a class.
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function index() 
     {
@@ -57,6 +57,30 @@ class ChatController extends Controller
         broadcast(new ChatEvent($chat->load('user')))->toOthers();
         
         return $chat;
+    }
+    // example component
+    public function example () {
 
+        $hello = 'Hello World';
+        // return chr(ord($hello[5]) + 5);
+        // strlen -> length of string
+        // return strlen($hello);
+        // ord is used to convert Ascii code
+        // return ord($hello);
+        // for($x = 0; $x< strlen($hello); $x++) {
+        //     $encode = ord($hello[$x]) + 5;
+        //     if ( $encode != 37 && $encode != 92) {
+        //         $encode_string = chr($encode);
+        //         echo $encode_string;
+        //     }
+        // }
+        $array = array(0 => 'blue', 1 => 'red', 2 => 'green', 3 => 'red');
+        $key = array_search('//', $array);   // $key = 1;
+        // return $key;
+        if ($key == false) {
+            var_dump($key) ;
+        } else {
+            dd($key);
+        }
     }
 }

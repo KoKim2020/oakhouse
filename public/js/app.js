@@ -102295,8 +102295,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var quasar_extras_material_icons__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(quasar_extras_material_icons__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var quasar_extras_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! quasar-extras/fontawesome */ "./node_modules/quasar-extras/fontawesome.js");
 /* harmony import */ var quasar_extras_fontawesome__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(quasar_extras_fontawesome__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-chat-scroll */ "./node_modules/vue-chat-scroll/dist/vue-chat-scroll.js");
-/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _component_register__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./component_register */ "./resources/js/component_register.js");
+/* harmony import */ var _component_register__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_component_register__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-chat-scroll */ "./node_modules/vue-chat-scroll/dist/vue-chat-scroll.js");
+/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_5__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -102315,8 +102317,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
-Vue.component('chat-component', __webpack_require__(/*! ./components/ChatComponent.vue */ "./resources/js/components/ChatComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -102332,7 +102332,8 @@ Vue.component('chat-component', __webpack_require__(/*! ./components/ChatCompone
 Vue.use(quasar__WEBPACK_IMPORTED_MODULE_0__["default"]); //use vue-chat-scroll package
 
 
-Vue.use(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_4___default.a);
+
+Vue.use(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_5___default.a);
 var app = new Vue({
   el: '#app'
 });
@@ -102385,6 +102386,19 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   cluster: "ap2",
   encrypted: true
 });
+
+/***/ }),
+
+/***/ "./resources/js/component_register.js":
+/*!********************************************!*\
+  !*** ./resources/js/component_register.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('chat-component', __webpack_require__(/*! ./components/ChatComponent.vue */ "./resources/js/components/ChatComponent.vue")["default"]);
 
 /***/ }),
 

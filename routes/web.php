@@ -30,3 +30,5 @@ Route::get('/chats', 'ChatController@index');
 Route::get('/messages', 'ChatController@fetchAllMessages');
 
 Route::post('/messages', 'ChatController@sendMessage')->name('messages.store');
+
+Route::get('/example', 'ChatController@example');
